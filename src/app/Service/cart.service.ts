@@ -5,23 +5,31 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CartService {
-  baseUrl: string = 'http://localhost:5000/api/bb/cart/';
+  baseUrl: string = 'https://flowershopbackend-t4e6.onrender.com/api/cart/';
 
   constructor(private http: HttpClient) { }
 
-  getAllCartProducts(id : string) {
-    return this.http.get(this.baseUrl + `get/${id}`);
+  getCartByCartId(cartId : string){
+    return this.http.get(this.baseUrl+`get-cart-by/${cartId}`)
   }
 
-  addProductToCart(id: string, customerid: any) {
-    return this.http.post(this.baseUrl + `add/${id}`, customerid);
+  // productId
+  // quantity
+  // priceAtPurchase
+  // priceAfterDiscount
+  addProductToCart(cartId: string, product: any) {
+    return this.http.post(this.baseUrl + `add-item/${cartId}`, product);
   }
 
-  deleteProductOfCart(id: string) {
-    return this.http.delete(this.baseUrl + `delete/${id}`);
+  deleteProductOfCart(itemId: string) {
+    return this.http.delete(this.baseUrl + `delete-cart-item//${itemId}`);
   }
 
-  deleteAllProducts() {
-    return this.http.delete(this.baseUrl + 'delete-all');
+  //itemId
+  //quantity
+  //cartId
+  updateCartItemsQuantity(cartId: string, item : any){
+    return this.http.post(this.baseUrl+`update-item-quantity/${cartId}`, item)
   }
+ 
 }

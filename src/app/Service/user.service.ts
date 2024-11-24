@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl: string = 'http://localhost:5000/api/bb/user/';
+  baseUrl: string = 'https://flowershopbackend-t4e6.onrender.com/api/user/';
 
   constructor(private http: HttpClient) { }
 
@@ -18,30 +18,34 @@ export class UserService {
   }
 
   loginUser(user: any) {
-    return this.http.post('http://localhost:5000/api/user/login', user);
+    return this.http.post(this.baseUrl + 'login', user);
   }
 
   getAllUsers() {
-    return this.http.get(this.baseUrl + 'get/all');
+    return this.http.get(this.baseUrl + 'get-all');
   }
 
   uploadProfilePic(id: string, profilePhoto: any) {
-    return this.http.post(`http://localhost:5000/api/bb/upload/profilePic/${id}`, profilePhoto);
+    return this.http.post(this.baseUrl + `upload/profilePic/${id}`, profilePhoto);
   }
 
   getProfilePhoto(id: string) {
-    return this.http.get(`http://localhost:5000/api/bb/get/profilePic/${id}`);
+    return this.http.get(this.baseUrl + `get/profilePic/${id}`);
   }
 
   editUser(id: string, user: any) {
-    return this.http.post(`http://localhost:5000/api/bb/edit/user/${id}`, user);
+    return this.http.post(this.baseUrl + `edit/${id}`, user);
   }
 
   deleteUser(id: string) {
-    return this.http.delete(`http://localhost:5000/api/bb/delete/user/${id}`);
+    return this.http.delete(this.baseUrl + `delete/${id}`);
   }
 
-  toSendVerificationOTP(email: any){
+  getUserById(id: string) {
+    return this.http.get(this.baseUrl + `get-user/${id}`)
+  }
+
+  toSendVerificationOTP(email: any) {
     return this.http.post('http://localhost:5000/api/bb/email/otp', email)
   }
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl: string = 'http://localhost:5000/api/bb/product/'
+  baseUrl: string = 'https://flowershopbackend-t4e6.onrender.com/api/product/'
 
 
   constructor(private http : HttpClient) { }
